@@ -1,0 +1,5 @@
+{
+    "token": "./src/base/keys/combo-token.key",
+    "mongo-key": "./src/base/keys/mongo-key.key",
+    "mongo-uri": "./src/base/keys/mongo-uri.key"
+}
