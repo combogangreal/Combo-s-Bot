@@ -6,7 +6,7 @@ For a copy, see <https://opensource.org/licenses/MIT>.
 """
 import os
 import asyncio
-from discord import Intents, Activity, ActivityType
+from discord import Intents, Activity, ActivityType, utils
 from loguru import logger
 from discord.ext.commands import Bot
 from cogwatch import watch
@@ -46,6 +46,7 @@ class ComboBot(Bot):
         logger.info("Database updated")
         
         for guild in self.guilds:
+            guild.member_count
             for member in guild.members:
                 data = config.DATABASE.find_one_document("ComboData", {"_id": member.id})
                 if data["mute_time"] > 0:
@@ -57,9 +58,9 @@ class ComboBot(Bot):
                     asyncio.sleep(ban_time)         
                     await member.unban(reason="Unbanned after bot restart")
         
-        guild = self.get_guild(id=1194856906133614643)
-        activity = Activity(name=f"{guild.member_count}", type=ActivityType.watching)
+        guild = utils.get(self.guilds, id=1194856906133614643)
+        activity = Activity(name=f"{str(guild.member_count)} Members", type=ActivityType.watching)
         await self.change_presence(activity=activity)
         logger.info("Presence updated")
         
-        self.logger.info("Bot ready")
+        logger.info("Bot ready")
