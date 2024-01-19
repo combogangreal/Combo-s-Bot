@@ -23,6 +23,7 @@ class MongoDBUtility:
     ---------
     @returns None: No return value.
     """
+
     def __init__(self, connection: str | MongoClient, database_name: str) -> None:
         self.client = (
             connection
@@ -43,6 +44,7 @@ class MongoDBUtility:
     ---------
     @returns Any: The ID of the inserted document.
     """
+
     def insert_document(self, collection_name: str, document: Dict[str, Any]) -> Any:
         collection: Collection = self.database[collection_name]
         result: InsertOneResult = collection.insert_one(document)
@@ -61,6 +63,7 @@ class MongoDBUtility:
     ---------
     @returns List[Dict[str, Any]]: List of documents matching the query.
     """
+
     def find_documents(
         self,
         collection_name: str,
@@ -84,6 +87,7 @@ class MongoDBUtility:
     ---------
     @returns Optional[Dict[str, Any]]: The first document matching the query, or None if not found.
     """
+
     def find_one_document(
         self,
         collection_name: str,
@@ -106,6 +110,7 @@ class MongoDBUtility:
     ---------
     @returns int: The number of documents modified.
     """
+
     def update_document(
         self, collection_name: str, query: Dict[str, Any], update: Dict[str, Any]
     ) -> int:
@@ -125,6 +130,7 @@ class MongoDBUtility:
     ---------
     @returns int: The number of documents deleted.
     """
+
     def delete_document(self, collection_name: str, query: Dict[str, Any]) -> int:
         collection: Collection = self.database[collection_name]
         result: DeleteResult = collection.delete_one(query)
@@ -143,6 +149,7 @@ class MongoDBUtility:
     ---------
     @returns Optional[Dict[str, Any]]: The updated document.
     """
+
     def find_document_and_update(
         self, collection_name: str, query: Dict[str, Any], update: Dict[str, Any]
     ) -> Optional[Dict[str, Any]]:
@@ -162,6 +169,7 @@ class MongoDBUtility:
     ---------
     @returns Optional[Dict[str, Any]]: The document matching the ID, or None if not found.
     """
+
     def find_document_by_id(
         self,
         collection_name: str,
@@ -183,6 +191,7 @@ class MongoDBUtility:
     ---------
     @returns Any: The ID of the inserted document.
     """
+
     def insert_document_if_not_exists(
         self, collection_name: str, document: Dict[str, Any]
     ) -> Any:
@@ -205,6 +214,7 @@ class MongoDBUtility:
     ---------
     @returns int: The number of documents modified.
     """
+
     def update_document_if_exists(
         self, collection_name: str, query: Dict[str, Any], update: Dict[str, Any]
     ) -> int:
